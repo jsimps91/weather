@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){ 
+           $(document).on('submit' , 'form' , function(){
+
+            var y = $("#city").val();
+            var x = ("http://api.openweathermap.org/data/2.5/weather?q="+y+"&APPID=6cb71f22db09ba13495ad227d2373d8a");
+            console.log(x);
+            console.log(y);
+           $.get(x, function(res) {
+               console.log(res);
+               var html_str = "<h1>"+res.name+"</h1>";
+               html_str += "<h2>"+Math.floor(((res.main.temp)-273.15)*(9/5)+32)+"</h2>";
+               $("#info").html(html_str);
+
+           }, "json");
+           return false;
+           });
+        })
+
+
+    </script>
+
+</head>
+<body>
+    <div>
+        <form>
+            <label for="city">City</label>
+            <input type="text" id="city">
+            <input type="submit" value="submit">
+        </form> 
+    </div>
+    <div id="info">
+    </div>
+
+    
+</body>
+</html>
